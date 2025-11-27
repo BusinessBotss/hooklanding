@@ -1,1894 +1,525 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
- <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HOOK — Editorial Landing Page</title>
-  <script src="/_sdk/element_sdk.js"></script><!-- 
-    ═══════════════════════════════════════════════════════════════════════════════
-    HOOK EDITORIAL LANDING PAGE
-    ═══════════════════════════════════════════════════════════════════════════════
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOOK — Editorial Experiences</title>
     
-    Una landing page minimalista de alto impacto visual, inspirada en revistas
-    editoriales premium como Kinfolk, Cereal y The Gentlewoman.
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&display=swap" rel="stylesheet">
     
-    PALETA DE COLORES:
-    - #1a171b = Fondo principal (negro profundo editorial)
-    - #e4e2dd = Textos claros, títulos, divisores
-    - #bd000b = Acentos y CTAs (rojo intenso)
-    - #fae1d5 = Elementos suaves, backgrounds alternos
-    
-    PRINCIPIOS DE DISEÑO:
-    - Espaciado amplio y generoso entre secciones
-    - Tipografía grande y elegante con alto contraste
-    - Sin imágenes, iconos o elementos gráficos
-    - Transiciones suaves y refinadas
-    - Estética calmada, premium y madura
-    
-    ESTRUCTURA DE CONTENIDO:
-    1. Header minimalista con navegación
-    2. Hero editorial con CTA principal
-    3. Sección informativa "Qué es HOOK"
-    4. Proceso "Cómo funciona"
-    5. Filosofía y diferenciación
-    6. Testimonios editoriales
-    7. Próximos eventos
-    8. Formulario de registro conectado a Google Sheets
-    9. Footer editorial en columnas
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    -->
-  <style>
-        /* 
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        /* ═══════════════════════════════════════════════════════════════════════════════
+         CORE DESIGN SYSTEM & GLASSMORPHISM
         ═══════════════════════════════════════════════════════════════════════════════
-        RESET Y CONFIGURACIÓN BASE
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Establecemos una base limpia para construir sobre ella, eliminando estilos
-        predeterminados del navegador que interfieren con nuestra visión editorial.
         */
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            box-sizing: border-box;
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        VARIABLES CSS — SISTEMA DE DISEÑO
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Definimos las variables de color y tipografía que se utilizarán en toda
-        la página para mantener consistencia visual y facilitar ajustes globales.
-        */
-        
         :root {
-            /* Paleta de colores editorial */
-            --color-background: #1a171b;
-            --color-text: #e4e2dd;
-            --color-accent: #bd000b;
-            --color-soft: #fae1d5;
-            
-            /* Sistema tipográfico */
-            --font-serif: 'Playfair Display', 'Georgia', serif;
-            --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
-            
-            /* Espaciado editorial generoso */
-            --space-section: 200px;
-            --space-large: 120px;
-            --space-medium: 80px;
-            --space-small: 40px;
-            --space-tiny: 20px;
-            
-            /* Tamaños de fuente escalables */
-            --text-hero: 72px;
-            --text-heading: 48px;
-            --text-subheading: 32px;
-            --text-body: 18px;
-            --text-small: 14px;
-            
-            /* Anchos máximos para lectura óptima */
-            --width-text: 720px;
-            --width-content: 1200px;
-            
-            /* Transiciones suaves */
-            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            --bg-deep: #0a0a0a;
+            --bg-card: rgba(255, 255, 255, 0.03);
+            --border-glass: rgba(255, 255, 255, 0.08);
+            --accent-red: #bd000b;
+            --accent-glow: rgba(189, 0, 11, 0.35);
+            --text-main: #e4e2dd;
+            --text-muted: #9ca3af;
+            --font-serif: 'Playfair Display', serif;
+            --font-sans: 'Inter', sans-serif;
         }
-        
-        /* 
-        ��══════════════════════════════════════════════════════════════════════════════
-        TIPOGRAFÍA BASE
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Importamos fuentes de Google Fonts y establecemos el sistema tipográfico
-        base para toda la página.
-        */
-        
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
-        
-        html {
-            font-size: 16px;
-            height: 100%;
-        }
-        
+
         body {
+            background-color: var(--bg-deep);
+            color: var(--text-main);
             font-family: var(--font-sans);
-            background-color: var(--color-background);
-            color: var(--color-text);
-            line-height: 1.8;
-            font-weight: 300;
-            letter-spacing: 0.3px;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            width: 100%;
-            height: 100%;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════���═══
-        JERARQUÍA TIPOGRÁFICA
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Establecemos la jerarquía visual mediante diferentes tamaños y pesos
-        tipográficos, siguiendo principios editoriales de alto contraste.
-        */
-        
-        h1, h2, h3, h4, h5, h6 {
+
+        /* Tipografía Editorial */
+        h1, h2, h3, h4 {
             font-family: var(--font-serif);
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: -0.5px;
-            margin-bottom: var(--space-small);
         }
-        
-        h1 {
-            font-size: var(--text-hero);
-            font-weight: 900;
-            letter-spacing: -2px;
+
+        /* Glassmorphism Classes */
+        .glass-panel {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid var(--border-glass);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
         }
-        
-        h2 {
-            font-size: var(--text-heading);
-            letter-spacing: -1px;
+
+        .glass-nav {
+            background: rgba(10, 10, 10, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-glass);
         }
-        
-        h3 {
-            font-size: var(--text-subheading);
-        }
-        
-        p {
-            font-family: var(--font-sans);
-            font-size: var(--text-body);
-            line-height: 1.8;
-            margin-bottom: var(--space-small);
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        HEADER — NAVEGACIÓN MINIMALISTA
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        El header mantiene una estética limpia y elegante, con el logo y navegación
-        distribuidos horizontalmente. Se mantiene fijo en la parte superior para
-        facilitar la navegación.
-        */
-        
-        .header {
-            width: 100%;
-            padding: var(--space-small) var(--space-medium);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid rgba(228, 226, 221, 0.1);
-            background-color: var(--color-background);
+
+        /* Ambient Light Animation (Fondo sutil) */
+        .ambient-glow {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, rgba(189,0,11,0.08) 0%, rgba(10,10,10,0) 70%);
+            z-index: -1;
+            pointer-events: none;
+            animation: pulseGlow 10s infinite alternate;
         }
-        
-        .logo {
-            font-family: var(--font-serif);
-            font-size: 32px;
-            font-weight: 900;
-            letter-spacing: -1px;
-            color: var(--color-text);
-            text-decoration: none;
+
+        @keyframes pulseGlow {
+            0% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+            100% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
         }
-        
-        .nav {
-            display: flex;
-            gap: var(--space-medium);
-            align-items: center;
+
+        /* Botones con acento rojo y glow */
+        .btn-editorial {
+            background-color: var(--accent-red);
+            color: white;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid transparent;
         }
-        
-        .nav-link {
-            font-family: var(--font-sans);
-            font-size: var(--text-small);
-            font-weight: 400;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            color: var(--color-text);
-            text-decoration: none;
-            opacity: 0.7;
-            transition: var(--transition-smooth);
-        }
-        
-        .nav-link:hover {
-            opacity: 1;
-            color: var(--color-accent);
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        SECCIONES — ESTRUCTURA GENERAL
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Cada sección tiene espaciado amplio vertical para crear respiración
-        visual y una sensación de calma editorial.
-        */
-        
-        .section {
-            width: 100%;
-            padding: var(--space-section) var(--space-medium);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        
-        .section-content {
-            width: 100%;
-            max-width: var(--width-content);
-        }
-        
-        .section-text {
-            max-width: var(--width-text);
-            margin: 0 auto;
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        HERO SECTION — IMPACTO INICIAL
-        ���═════════════════���════════════════════════════════════════════════════════════
-        
-        La sección hero captura la atención inmediata con tipografía grande,
-        espaciado generoso y un CTA destacado. Es el punto focal de la página.
-        */
-        
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding-top: 100px;
-        }
-        
-        .hero-title {
-            max-width: 900px;
-            margin-bottom: var(--space-small);
-            animation: fadeInUp 1.2s ease-out;
-        }
-        
-        .hero-subtitle {
-            font-family: var(--font-sans);
-            font-size: 24px;
-            font-weight: 300;
-            max-width: 600px;
-            margin-bottom: var(--space-medium);
-            opacity: 0.8;
-            animation: fadeInUp 1.4s ease-out;
-        }
-        
-        .hero-line {
-            width: 120px;
-            height: 1px;
-            background-color: var(--color-text);
-            margin: var(--space-medium) auto;
-            opacity: 0.3;
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        BOTONES — LLAMADAS A LA ACCIÓN
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Los botones utilizan el color de acento rojo para destacar visualmente
-        y guiar la acción del usuario. Incluyen estados hover suaves.
-        */
-        
-        .cta-button {
-            display: inline-block;
-            padding: 18px 48px;
-            font-family: var(--font-sans);
-            font-size: var(--text-small);
-            font-weight: 500;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--color-text);
-            background-color: var(--color-accent);
-            border: none;
-            text-decoration: none;
-            cursor: pointer;
-            transition: var(--transition-smooth);
-            animation: fadeInUp 1.6s ease-out;
-        }
-        
-        .cta-button:hover {
-            background-color: #a00009;
+
+        .btn-editorial:hover {
+            box-shadow: 0 0 20px var(--accent-glow);
             transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(189, 0, 11, 0.3);
+            background-color: #d1000c;
         }
-        
-        .cta-button:active {
+
+        /* Animaciones de Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
             transform: translateY(0);
         }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        ANIMACIONES SUTILES
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Animaciones suaves que añaden movimiento elegante sin ser intrusivas.
-        */
-        
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+
+        /* Utilidades de Selección */
+        ::selection {
+            background: var(--accent-red);
+            color: white;
         }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        WHAT IS HOOK — SECCIÓN INFORMATIVA
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Bloque de texto largo y bien espaciado que explica el concepto de HOOK
-        con un estilo editorial refinado.
-        */
-        
-        .what-section {
-            background-color: var(--color-background);
+
+        /* Form Styling */
+        input, select, textarea {
+            background: rgba(255,255,255,0.02) !important;
+            border: 1px solid var(--border-glass) !important;
+            color: var(--text-main) !important;
+            transition: 0.3s;
         }
-        
-        .what-title {
-            text-align: center;
-            margin-bottom: var(--space-large);
-        }
-        
-        .what-text {
-            font-size: 20px;
-            line-height: 2;
-            text-align: left;
-            opacity: 0.9;
-        }
-        
-        .what-text p {
-            margin-bottom: var(--space-medium);
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        HOW IT WORKS — PROCESO EN PASOS
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Tres bloques verticales que explican el funcionamiento sin iconos,
-        solo con tipografía pura y espaciado editorial.
-        */
-        
-        .how-section {
-            background-color: var(--color-background);
-        }
-        
-        .how-title {
-            text-align: center;
-            margin-bottom: var(--space-large);
-        }
-        
-        .how-steps {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-large);
-            max-width: var(--width-text);
-            margin: 0 auto;
-        }
-        
-        .step {
-            padding: var(--space-medium) 0;
-            border-bottom: 1px solid rgba(228, 226, 221, 0.1);
-        }
-        
-        .step:last-child {
-            border-bottom: none;
-        }
-        
-        .step-number {
-            font-family: var(--font-serif);
-            font-size: 14px;
-            font-weight: 700;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            color: var(--color-accent);
-            margin-bottom: var(--space-tiny);
-        }
-        
-        .step-title {
-            font-size: var(--text-subheading);
-            margin-bottom: var(--space-small);
-        }
-        
-        .step-text {
-            font-size: var(--text-body);
-            line-height: 1.8;
-            opacity: 0.8;
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        PHILOSOPHY — MANIFIESTO EDITORIAL
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Sección con fondo alterno que presenta la filosofía de marca con un
-        estilo de manifiesto editorial.
-        */
-        
-        .philosophy-section {
-            background-color: var(--color-soft);
-            color: var(--color-background);
-        }
-        
-        .philosophy-title {
-            text-align: center;
-            color: var(--color-background);
-            margin-bottom: var(--space-large);
-        }
-        
-        .philosophy-text {
-            font-size: 22px;
-            line-height: 2.2;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            color: var(--color-background);
-            font-weight: 300;
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        TESTIMONIALS — VOCES EDITORIALES
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Testimonios presentados como citas editoriales con formato de revista.
-        Solo tipografía, sin fotos ni elementos gráficos.
-        */
-        
-        .testimonials-section {
-            background-color: var(--color-background);
-        }
-        
-        .testimonials-title {
-            text-align: center;
-            margin-bottom: var(--space-large);
-        }
-        
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--space-large);
-            max-width: var(--width-content);
-        }
-        
-        .testimonial {
-            padding: var(--space-medium);
-            border: 1px solid rgba(228, 226, 221, 0.1);
-            transition: var(--transition-smooth);
-        }
-        
-        .testimonial:hover {
-            border-color: var(--color-accent);
-            transform: translateY(-5px);
-        }
-        
-        .testimonial-quote {
-            font-family: var(--font-serif);
-            font-size: 20px;
-            line-height: 1.7;
-            font-style: italic;
-            margin-bottom: var(--space-small);
-            opacity: 0.9;
-        }
-        
-        .testimonial-line {
-            width: 40px;
-            height: 1px;
-            background-color: var(--color-accent);
-            margin: var(--space-small) 0;
-        }
-        
-        .testimonial-author {
-            font-family: var(--font-sans);
-            font-size: var(--text-small);
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 5px;
-        }
-        
-        .testimonial-role {
-            font-family: var(--font-sans);
-            font-size: var(--text-small);
-            font-weight: 300;
-            opacity: 0.6;
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        EVENTS — PRÓXIMOS ENCUENTROS
-        ════════════════════════════════════��══════════════════════════════════════════
-        
-        Cards limpias que presentan eventos próximos con tipografía pura,
-        sin imágenes ni iconos decorativos.
-        */
-        
-        .events-section {
-            background-color: var(--color-background);
-        }
-        
-        .events-title {
-            text-align: center;
-            margin-bottom: var(--space-large);
-        }
-        
-        .events-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-medium);
-            max-width: var(--width-content);
-        }
-        
-        .event-card {
-            padding: var(--space-medium);
-            border: 1px solid rgba(228, 226, 221, 0.1);
-            transition: var(--transition-smooth);
-            cursor: pointer;
-        }
-        
-        .event-card:hover {
-            border-color: var(--color-accent);
-            transform: translateY(-3px);
-        }
-        
-        .event-date {
-            font-family: var(--font-sans);
-            font-size: var(--text-small);
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: var(--color-accent);
-            margin-bottom: var(--space-tiny);
-        }
-        
-        .event-name {
-            font-family: var(--font-serif);
-            font-size: 28px;
-            margin-bottom: var(--space-tiny);
-        }
-        
-        .event-location {
-            font-family: var(--font-sans);
-            font-size: var(--text-small);
-            opacity: 0.6;
-            margin-bottom: var(--space-tiny);
-        }
-        
-        .event-description {
-            font-family: var(--font-sans);
-            font-size: 16px;
-            line-height: 1.6;
-            opacity: 0.8;
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        FORM — REGISTRO FUNCIONAL
-        ════════════════════════════════════════════════════════════════════���══════════
-        
-        Formulario conectado a Google Sheets para captura de datos. Diseño
-        minimalista coherente con el resto de la página.
-        */
-        
-        .form-section {
-            background-color: var(--color-background);
-        }
-        
-        .form-title {
-            text-align: center;
-            margin-bottom: var(--space-small);
-        }
-        
-        .form-subtitle {
-            text-align: center;
-            font-size: var(--text-body);
-            opacity: 0.7;
-            margin-bottom: var(--space-large);
-        }
-        
-        .form-container {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        
-        .form-group {
-            margin-bottom: var(--space-small);
-        }
-        
-        .form-label {
-            display: block;
-            font-family: var(--font-sans);
-            font-size: var(--text-small);
-            font-weight: 600;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 10px;
-            color: var(--color-text);
-        }
-        
-        .form-input,
-        .form-select {
-            width: 100%;
-            padding: 16px 20px;
-            font-family: var(--font-sans);
-            font-size: var(--text-body);
-            color: var(--color-text);
-            background-color: transparent;
-            border: 1px solid rgba(228, 226, 221, 0.2);
-            transition: var(--transition-smooth);
-        }
-        
-        .form-input:focus,
-        .form-select:focus {
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--accent-red) !important;
+            background: rgba(255,255,255,0.05) !important;
             outline: none;
-            border-color: var(--color-accent);
-            background-color: rgba(228, 226, 221, 0.02);
+            box-shadow: 0 0 10px var(--accent-glow);
         }
-        
-        .form-select {
-            cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23e4e2dd' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 20px center;
-            padding-right: 50px;
-        }
-        
-        .form-submit {
-            width: 100%;
-            margin-top: var(--space-small);
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        FOOTER — CIERRE EDITORIAL
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Footer en tres columnas con información de contacto, enlaces y una
-        frase de cierre elegante.
-        */
-        
-        .footer {
-            width: 100%;
-            padding: var(--space-large) var(--space-medium) var(--space-medium);
-            border-top: 1px solid rgba(228, 226, 221, 0.1);
-            background-color: var(--color-background);
-        }
-        
-        .footer-content {
-            max-width: var(--width-content);
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-medium);
-            margin-bottom: var(--space-large);
-        }
-        
-        .footer-column h3 {
-            font-size: 18px;
-            margin-bottom: var(--space-small);
-            color: var(--color-text);
-        }
-        
-        .footer-column p,
-        .footer-column a {
-            font-size: var(--text-small);
-            line-height: 1.8;
-            opacity: 0.7;
-            color: var(--color-text);
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;
-            transition: var(--transition-smooth);
-        }
-        
-        .footer-column a:hover {
-            opacity: 1;
-            color: var(--color-accent);
-        }
-        
-        .footer-bottom {
-            max-width: var(--width-content);
-            margin: 0 auto;
-            padding-top: var(--space-medium);
-            border-top: 1px solid rgba(228, 226, 221, 0.1);
-            text-align: center;
-        }
-        
-        .footer-tagline {
-            font-family: var(--font-serif);
-            font-size: 24px;
-            font-style: italic;
-            color: var(--color-text);
-            opacity: 0.8;
-            margin-bottom: var(--space-tiny);
-        }
-        
-        .footer-copyright {
-            font-size: var(--text-small);
-            opacity: 0.5;
-        }
-        
-        /* 
-        ═══════════════════════════════════��═══════════════════════════════════════════
-        RESPONSIVE DESIGN — ADAPTACIÓN MÓVIL
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Media queries para garantizar que la experiencia editorial se mantenga
-        en dispositivos móviles y tablets.
-        */
-        
-        @media (max-width: 1024px) {
-            :root {
-                --text-hero: 56px;
-                --text-heading: 38px;
-                --text-subheading: 28px;
-                --space-section: 120px;
-                --space-large: 80px;
-            }
-            
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .events-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            :root {
-                --text-hero: 42px;
-                --text-heading: 32px;
-                --text-subheading: 24px;
-                --text-body: 16px;
-                --space-section: 80px;
-                --space-large: 60px;
-                --space-medium: 40px;
-            }
-            
-            .header {
-                flex-direction: column;
-                gap: var(--space-small);
-                padding: var(--space-small);
-            }
-            
-            .nav {
-                gap: var(--space-small);
-                flex-wrap: wrap;
-                justify-content: center;
-            }
-            
-            .hero-subtitle {
-                font-size: 18px;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-                gap: var(--space-medium);
-            }
-            
-            .what-text {
-                font-size: 18px;
-            }
-            
-            .philosophy-text {
-                font-size: 18px;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            :root {
-                --text-hero: 32px;
-                --text-heading: 28px;
-                --text-subheading: 20px;
-            }
-            
-            .section {
-                padding: var(--space-medium) var(--space-small);
-            }
-            
-            .cta-button {
-                padding: 14px 32px;
-                font-size: 12px;
-            }
-        }
-        
-        /* 
-        ═══════════════════════════════════════════════════════════════════════════════
-        UTILITY CLASSES — CLASES DE UTILIDAD
-        ═══════════════════════════════════════════════════════════════════════════════
-        
-        Clases auxiliares para ajustes rápidos de espaciado y alineación.
-        */
-        
-        .text-center {
-            text-align: center;
-        }
-        
-        .mb-large {
-            margin-bottom: var(--space-large);
-        }
-        
-        .mb-medium {
-            margin-bottom: var(--space-medium);
-        }
-        
-        .mb-small {
-            margin-bottom: var(--space-small);
-        }
-        
-        .opacity-high {
-            opacity: 0.9;
-        }
-        
-        .opacity-medium {
-            opacity: 0.7;
-        }
-        
-        .opacity-low {
-            opacity: 0.5;
-        }
-        
-        /* 
-        ══════════════════════════════════════════════════════════════════════��════════
-        FIN DE ESTILOS CSS
-        ═══════════════════════════════════════════════════════════════════════════════
-        */
     </style>
-  <style>@view-transition { navigation: auto; }</style>
-  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
-  <script src="https://cdn.tailwindcss.com" type="text/javascript"></script>
- </head>
- <body><!-- 
-    ══════════════════════════════════════════════════════════════════════���════════
-    HEADER NAVIGATION
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    Barra de navegación fija en la parte superior con logo y enlaces principales.
-    -->
-  <header class="header"><a href="#" class="logo" id="logo">HOOK.</a>
-   <nav class="nav"><a href="#hero" class="nav-link" id="navHome">Home</a> <a href="#events" class="nav-link" id="navEvents">Events</a> <a href="#about" class="nav-link" id="navAbout">About</a> <a href="#contact" class="nav-link" id="navContact">Contact</a>
-   </nav>
-  </header><!-- 
-    ══════════════════════════════════════════════���════════════════════════════════
-    HERO SECTION
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    Sección principal de impacto con título grande, subtítulo y CTA principal.
-    Ocupa toda la altura de la ventana para máximo impacto visual.
-    -->
-  <section class="hero section" id="hero">
-   <div class="section-content">
-    <h1 class="hero-title" id="heroTitle">Conexiones Auténticas en Espacios Extraordinarios</h1>
-    <p class="hero-subtitle" id="heroSubtitle">HOOK es donde las personas más interesantes se encuentran en los lugares más memorables de la ciudad.</p><a href="#contact" class="cta-button" id="heroCta">Únete al Siguiente Evento</a>
-    <div class="hero-line"></div>
-   </div>
-  </section><!-- 
-    ═══════════════════════════════════════════════════════════════════════════════
-    WHAT IS HOOK SECTION
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    Explicación detallada del concepto HOOK con texto largo y bien espaciado,
-    siguiendo principios de lectura editorial.
-    -->
-  <section class="what-section section" id="about">
-   <div class="section-content">
-    <h2 class="what-title" id="whatTitle">Qué es HOOK</h2>
-    <div class="what-text section-text">
-     <p id="whatContent">HOOK no es una aplicación de citas. No es networking convencional. Es una cuidadosa curaduría de experiencias donde personas fascinantes se encuentran en contextos excepcionales.</p>
-     <p>Cada evento es diseñado con intención: desde la selección de asistentes hasta la elección del espacio. Creemos que las mejores conexiones surgen cuando el entorno inspira conversaciones genuinas y la química fluye naturalmente.</p>
-     <p>En HOOK, priorizamos calidad sobre cantidad. Cada encuentro está limitado a un grupo selecto de participantes, asegurando que cada persona tenga espacio para brillar y conectar de manera significativa.</p>
-     <p>No se trata de coleccionar contactos. Se trata de construir relaciones auténticas con personas que comparten tu curiosidad por la vida, tu aprecio por las experiencias memorables y tu deseo de conexiones reales.</p>
-    </div>
-   </div>
-  </section><!-- 
-    ═══════════════════════════════════════════════════════════════════════════════
-    HOW IT WORKS SECTION
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    Proceso explicado en tres pasos verticales sin iconos, solo tipografía
-    elegante y espaciado editorial.
-    -->
-  <section class="how-section section">
-   <div class="section-content">
-    <h2 class="how-title" id="howTitle">Cómo Funciona</h2>
-    <div class="how-steps"><!-- Paso 1 -->
-     <div class="step">
-      <div class="step-number">
-       Paso 01
-      </div>
-      <h3 class="step-title" id="howStep1Title">Aplica a un Evento</h3>
-      <p class="step-text" id="howStep1Text">Explora nuestros próximos eventos y elige el que más resuene contigo. Cada experiencia es única: desde cenas íntimas en azoteas hasta encuentros culturales en galerías de arte. Completa una breve aplicación que nos ayude a conocerte mejor.</p>
-     </div><!-- Paso 2 -->
-     <div class="step">
-      <div class="step-number">
-       Paso 02
-      </div>
-      <h3 class="step-title" id="howStep2Title">Recibe tu Invitación</h3>
-      <p class="step-text" id="howStep2Text">Nuestro equipo revisa cuidadosamente cada aplicación para curar un grupo diverso y complementario. Si eres seleccionado, recibirás una invitación personalizada con todos los detalles del evento y una introducción al contexto de la experiencia.</p>
-     </div><!-- Paso 3 -->
-     <div class="step">
-      <div class="step-number">
-       Paso 03
-      </div>
-      <h3 class="step-title" id="howStep3Title">Vive la Experiencia</h3>
-      <p class="step-text" id="howStep3Text">Llega al evento con mente abierta y curiosidad genuina. Disfruta de conversaciones significativas, descubre perspectivas fascinantes y construye conexiones auténticas. Cada experiencia está diseñada para facilitar interacciones naturales y memorables.</p>
-     </div>
-    </div>
-   </div>
-  </section><!-- 
-    ═══════════════════════════════════════════════════════════════════════════════
-    PHILOSOPHY SECTION
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    Manifiesto editorial con fondo alterno que presenta la filosofía de marca.
-    -->
-  <section class="philosophy-section section">
-   <div class="section-content">
-    <h2 class="philosophy-title" id="philosophyTitle">Nuestra Filosofía</h2>
-    <div class="philosophy-text">
-     <p id="philosophyContent">En un mundo saturado de conexiones superficiales, HOOK crea espacios para profundidad. Creemos que las personas más interesantes merecen encuentros extraordinarios. Que la serendipia funciona mejor cuando está cuidadosamente cultivada. Que el contexto importa tanto como las personas. Y que las mejores historias comienzan con un "Nos conocimos en un evento de HOOK..."</p>
-    </div>
-   </div>
-  </section><!-- 
-    ═══════════════════════════════════════════════════════════════════════════════
-    TESTIMONIALS SECTION
-    ══════════════════════════��════════════════════════════════════════════════════
-    
-    Testimonios presentados como citas editoriales. Solo tipografía, sin fotos.
-    -->
-  <section class="testimonials-section section">
-   <div class="section-content">
-    <h2 class="testimonials-title">Lo que Dicen Nuestros Miembros</h2>
-    <div class="testimonials-grid"><!-- Testimonio 1 -->
-     <div class="testimonial">
-      <p class="testimonial-quote">"No es exageración decir que HOOK cambió mi perspectiva sobre cómo conocer personas. La calidad de las conversaciones y la autenticidad de las conexiones que he construido aquí no tiene comparación con ninguna otra experiencia social."</p>
-      <div class="testimonial-line"></div>
-      <p class="testimonial-author">Sofía Martínez</p>
-      <p class="testimonial-role">Arquitecta / Madrid</p>
-     </div><!-- Testimonio 2 -->
-     <div class="testimonial">
-      <p class="testimonial-quote">"Como introvertido, siempre evité eventos de networking. HOOK es diferente. El ambiente es relajado, las personas son genuinas y cada evento está diseñado para facilitar conexiones significativas sin la presión de las interacciones forzadas."</p>
-      <div class="testimonial-line"></div>
-      <p class="testimonial-author">David Chen</p>
-      <p class="testimonial-role">Diseñador / Barcelona</p>
-     </div><!-- Testimonio 3 -->
-     <div class="testimonial">
-      <p class="testimonial-quote">"He asistido a tres eventos de HOOK y cada uno ha sido memorable por razones diferentes. La curaduría de asistentes es impecable y los espacios siempre sorprenden. Es exactamente lo que estaba buscando sin saber que existía."</p>
-      <div class="testimonial-line"></div>
-      <p class="testimonial-author">Lucía Romero</p>
-      <p class="testimonial-role">Escritora / Valencia</p>
-     </div>
-    </div>
-   </div>
-  </section><!-- 
-    ═══════════════════════════════════════════════════════════════════════════════
-    EVENTS SECTION
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    Cards limpias que muestran próximos eventos con tipografía pura.
-    -->
-  <section class="events-section section" id="events">
-   <div class="section-content">
-    <h2 class="events-title">Próximos Eventos</h2>
-    <div class="events-grid"><!-- Evento 1 -->
-     <div class="event-card">
-      <div class="event-date">
-       15 Diciembre 2024
-      </div>
-      <h3 class="event-name">Cena en la Azotea</h3>
-      <p class="event-location">Madrid Centro</p>
-      <p class="event-description">Una velada íntima bajo las estrellas con vistas panorámicas de la ciudad. Cena de autor, conversaciones profundas y conexiones auténticas.</p>
-     </div><!-- Evento 2 -->
-     <div class="event-card">
-      <div class="event-date">
-       22 Diciembre 2024
-      </div>
-      <h3 class="event-name">Encuentro Cultural</h3>
-      <p class="event-location">Galería Moderna BCN</p>
-      <p class="event-description">Arte contemporáneo como catalizador de conversaciones fascinantes. Exploración guiada seguida de cócteles y diálogo abierto.</p>
-     </div><!-- Evento 3 -->
-     <div class="event-card">
-      <div class="event-date">
-       5 Enero 2025
-      </div>
-      <h3 class="event-name">Brunch &amp; Ideas</h3>
-      <p class="event-location">Espacio Privado Valencia</p>
-      <p class="event-description">Mañana relajada con brunch gourmet, café excepcional y conversaciones sobre proyectos, pasiones y posibilidades.</p>
-     </div><!-- Evento 4 -->
-     <div class="event-card">
-      <div class="event-date">
-       12 Enero 2025
-      </div>
-      <h3 class="event-name">Noche de Jazz</h3>
-      <p class="event-location">Club Íntimo Madrid</p>
-      <p class="event-description">Música en vivo, ambiente sofisticado y personas fascinantes. Una experiencia sensorial diseñada para conexiones memorables.</p>
-     </div><!-- Evento 5 -->
-     <div class="event-card">
-      <div class="event-date">
-       20 Enero 2025
-      </div>
-      <h3 class="event-name">Experiencia Gastronómica</h3>
-      <p class="event-location">Restaurante Secreto BCN</p>
-      <p class="event-description">Menú degustación de chef emergente, maridaje de vinos naturales y conversaciones sobre arte, cultura y creatividad.</p>
-     </div><!-- Evento 6 -->
-     <div class="event-card">
-      <div class="event-date">
-       28 Enero 2025
-      </div>
-      <h3 class="event-name">Salón Literario</h3>
-      <p class="event-location">Librería Boutique Valencia</p>
-      <p class="event-description">Charla con autor invitado, vino y discusión sobre narrativas que transforman perspectivas. Para amantes de historias bien contadas.</p>
-     </div>
-    </div>
-   </div>
-  </section><!-- 
-    ═══════════════════════════════════════════════════════════════════════════════
-    FORM SECTION — REGISTRO FUNCIONAL
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    Formulario conectado a Google Sheets para captura de inscripciones.
-    
-    INSTRUCCIONES PARA CONECTAR CON GOOGLE SHEETS:
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    PASO 1: CREAR GOOGLE SHEET Y CONFIGURAR ENCABEZADOS
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    1. Abre Google Sheets: https://sheets.google.com
-    2. Crea una hoja nueva llamada "HOOK Registros"
-    3. En la primera fila (fila 1), añade estos encabezados:
-       A1: Fecha y Hora
-       B1: Nombre
-       C1: Email
-       D1: Edad
-       E1: Ciudad
-       F1: Evento Seleccionado
-       G1: Estado
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    PASO 2: ABRIR APPS SCRIPT
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    4. En tu Google Sheet, ve a: Extensiones > Apps Script
-    5. Se abrirá una nueva ventana del editor de código
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    PASO 3: COPIAR CÓDIGO APPS SCRIPT
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    6. Borra TODO el código que aparece por defecto (function myFunction() {})
-    7. Copia y pega TODO el siguiente código:
-    
-    ┌─────────────────────────────────────────────────────────────────────────────┐
-    │ CÓDIGO GOOGLE APPS SCRIPT - COPIAR TODO                                      │
-    └─────────────────────────────────────────────────────────────────────────────┘
-    
-/**
- * ═══════════════════════════════════════════════════════════════════════════════
- * HOOK LANDING PAGE - GOOGLE APPS SCRIPT
- * ═══════════════════════════════════════════════════════════════════════════════
- * 
- * Este script maneja los envíos del formulario de la landing page HOOK
- * y los guarda en Google Sheets. También incluye funcionalidades para
- * enviar emails de confirmación y generar reportes.
- * 
- * FUNCIONES PRINCIPALES:
- * - doPost(): Recibe datos del formulario y los guarda en la hoja
- * - doGet(): Crea interfaz web para ver registros
- * - enviarEmailConfirmacion(): Envía email automático al registrarse
- * - generarReporte(): Crea reporte de registros por evento
- * 
- * ═══════════════════════════════════════════════════════════════════════════════
- */
+</head>
+<body class="antialiased">
 
-// ═══════════════════════════════════════════════════════════════════════════════
-// CONFIGURACIÓN GLOBAL
-// ═══════════════════════════════════════════════════════════════════════════════
+    <div class="ambient-glow"></div>
 
-// Nombre de la hoja donde se guardarán los registros
-const NOMBRE_HOJA = "Hoja 1"; // Cambia esto si tu hoja tiene otro nombre
+    <button id="langToggle" class="fixed bottom-8 right-8 z-50 glass-panel px-6 py-3 rounded-full hover:border-red-800 transition-all flex items-center gap-2 group">
+        <span class="text-xs tracking-widest uppercase font-semibold group-hover:text-red-500 transition-colors">
+            <span id="currentLangLabel">ES</span> / <span class="opacity-50">EN</span>
+        </span>
+    </button>
 
-// Email desde donde se enviarán las confirmaciones (debe ser tu email de Google)
-const EMAIL_REMITENTE = "tu@email.com"; // Cambia esto por tu email
-
-// Activar/desactivar email automático de confirmación
-const ENVIAR_EMAIL_CONFIRMACION = false; // Cambia a true para activar emails
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// FUNCIÓN PRINCIPAL: RECIBIR DATOS DEL FORMULARIO
-// ═══════════════════════════════════════════════════════════════════════════════
-
-/**
- * Función doPost() - Se ejecuta cuando el formulario envía datos
- * Esta es la función principal que conecta el formulario con Google Sheets
- */
-function doPost(e) {
-  try {
-    // Obtener la hoja activa
-    var hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(NOMBRE_HOJA);
-    
-    // Si no existe la hoja, crearla
-    if (!hoja) {
-      hoja = SpreadsheetApp.getActiveSpreadsheet().getSheets()[0];
-      hoja.setName(NOMBRE_HOJA);
-    }
-    
-    // Extraer datos del formulario
-    var datos = e.parameter;
-    var timestamp = new Date();
-    
-    // Preparar fila de datos
-    var nuevaFila = [
-      timestamp,                    // Fecha y hora de registro
-      datos.nombre || "",          // Nombre del solicitante
-      datos.email || "",           // Email del solicitante
-      datos.edad || "",            // Edad del solicitante
-      datos.ciudad || "",          // Ciudad del solicitante
-      datos.evento || "",          // Evento seleccionado
-      "Pendiente"                  // Estado inicial
-    ];
-    
-    // Añadir fila a la hoja
-    hoja.appendRow(nuevaFila);
-    
-    // Enviar email de confirmación si está activado
-    if (ENVIAR_EMAIL_CONFIRMACION && datos.email) {
-      enviarEmailConfirmacion(datos.email, datos.nombre, datos.evento);
-    }
-    
-    // Registrar en log para debugging
-    console.log("Nuevo registro guardado: " + datos.nombre + " - " + datos.email);
-    
-    // Retornar respuesta exitosa
-    return ContentService
-      .createTextOutput(JSON.stringify({
-        result: "success",
-        message: "Registro guardado correctamente",
-        timestamp: timestamp.toISOString()
-      }))
-      .setMimeType(ContentService.MimeType.JSON);
-      
-  } catch (error) {
-    // Registrar error
-    console.error("Error al procesar formulario: " + error.toString());
-    
-    // Retornar respuesta de error
-    return ContentService
-      .createTextOutput(JSON.stringify({
-        result: "error",
-        message: "Error al guardar registro: " + error.toString()
-      }))
-      .setMimeType(ContentService.MimeType.JSON);
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// FUNCIÓN: CREAR INTERFAZ WEB PARA VER REGISTROS
-// ═══════════════════════════════════════════════════════════════════════════════
-
-/**
- * Función doGet() - Crea una página web simple para visualizar registros
- * Puedes acceder a esta página desde la URL de tu Web App
- */
-function doGet(e) {
-  try {
-    var hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(NOMBRE_HOJA);
-    var datos = hoja.getDataRange().getValues();
-    
-    // Crear HTML de la página
-    var html = '<html><head>';
-    html += '<style>';
-    html += 'body { font-family: Arial, sans-serif; padding: 20px; background: #1a171b; color: #e4e2dd; }';
-    html += 'h1 { color: #bd000b; }';
-    html += 'table { width: 100%; border-collapse: collapse; margin-top: 20px; }';
-    html += 'th, td { padding: 12px; text-align: left; border-bottom: 1px solid rgba(228, 226, 221, 0.1); }';
-    html += 'th { background-color: #bd000b; color: #e4e2dd; }';
-    html += 'tr:hover { background-color: rgba(228, 226, 221, 0.05); }';
-    html += '.stats { background: rgba(228, 226, 221, 0.05); padding: 15px; margin-bottom: 20px; }';
-    html += '</style>';
-    html += '</head><body>';
-    
-    html += '<h1>HOOK - Panel de Registros</h1>';
-    
-    // Estadísticas rápidas
-    html += '<div class="stats">';
-    html += '<p><strong>Total de Registros:</strong> ' + (datos.length - 1) + '</p>';
-    html += '</div>';
-    
-    // Tabla de datos
-    html += '<table>';
-    
-    // Encabezados
-    html += '<tr>';
-    for (var j = 0; j < datos[0].length; j++) {
-      html += '<th>' + datos[0][j] + '</th>';
-    }
-    html += '</tr>';
-    
-    // Filas de datos
-    for (var i = 1; i < datos.length; i++) {
-      html += '<tr>';
-      for (var j = 0; j < datos[i].length; j++) {
-        html += '<td>' + datos[i][j] + '</td>';
-      }
-      html += '</tr>';
-    }
-    
-    html += '</table>';
-    html += '</body></html>';
-    
-    return HtmlService.createHtmlOutput(html);
-    
-  } catch (error) {
-    return HtmlService.createHtmlOutput('<h1>Error al cargar datos</h1><p>' + error.toString() + '</p>');
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// FUNCIÓN: ENVIAR EMAIL DE CONFIRMACIÓN
-// ═══════════════════════════════════════════════════════════════════════════════
-
-/**
- * Envía un email de confirmación al usuario que se registró
- * 
- * @param {string} emailDestino - Email del destinatario
- * @param {string} nombre - Nombre del destinatario
- * @param {string} evento - Evento al que se registró
- */
-function enviarEmailConfirmacion(emailDestino, nombre, evento) {
-  try {
-    var asunto = "✓ Confirmación de Registro - HOOK";
-    
-    var mensaje = "Hola " + nombre + ",\n\n";
-    mensaje += "Gracias por tu interés en HOOK.\n\n";
-    mensaje += "Hemos recibido tu solicitud para el evento:\n";
-    mensaje += "→ " + evento + "\n\n";
-    mensaje += "Nuestro equipo revisará tu aplicación y te contactaremos pronto con más detalles.\n\n";
-    mensaje += "¿Preguntas? Responde a este email.\n\n";
-    mensaje += "—\n";
-    mensaje += "El equipo de HOOK\n";
-    mensaje += "Donde las mejores historias comienzan.";
-    
-    // Enviar email
-    GmailApp.sendEmail(emailDestino, asunto, mensaje, {
-      name: 'HOOK',
-      replyTo: EMAIL_REMITENTE
-    });
-    
-    console.log("Email enviado a: " + emailDestino);
-    
-  } catch (error) {
-    console.error("Error al enviar email: " + error.toString());
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// FUNCIÓN: GENERAR REPORTE DE REGISTROS POR EVENTO
-// ═══════════════════════════════════════════════════════════════════════════════
-
-/**
- * Genera un reporte con estadísticas de registros por evento
- * Ejecuta esta función manualmente desde el editor de Apps Script
- */
-function generarReporte() {
-  try {
-    var hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(NOMBRE_HOJA);
-    var datos = hoja.getDataRange().getValues();
-    
-    // Crear objeto para contar registros por evento
-    var eventosPorConteo = {};
-    
-    // Saltar la fila de encabezados (i = 1)
-    for (var i = 1; i < datos.length; i++) {
-      var evento = datos[i][5]; // Columna F (índice 5) = Evento
-      
-      if (evento) {
-        if (eventosPorConteo[evento]) {
-          eventosPorConteo[evento]++;
-        } else {
-          eventosPorConteo[evento] = 1;
-        }
-      }
-    }
-    
-    // Mostrar reporte en log
-    console.log("═══════════════════════════════════════════════════════");
-    console.log("REPORTE DE REGISTROS POR EVENTO");
-    console.log("═══════════════════════════════════════════════════════");
-    console.log("Total de registros: " + (datos.length - 1));
-    console.log("");
-    
-    for (var evento in eventosPorConteo) {
-      console.log(evento + ": " + eventosPorConteo[evento] + " registros");
-    }
-    
-    console.log("═══════════════════════════════════════════════════════");
-    
-    // También crear una hoja nueva con el reporte
-    var hojaReporte = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Reporte");
-    
-    if (!hojaReporte) {
-      hojaReporte = SpreadsheetApp.getActiveSpreadsheet().insertSheet("Reporte");
-    } else {
-      hojaReporte.clear();
-    }
-    
-    // Escribir encabezados
-    hojaReporte.appendRow(["Evento", "Número de Registros"]);
-    
-    // Escribir datos
-    for (var evento in eventosPorConteo) {
-      hojaReporte.appendRow([evento, eventosPorConteo[evento]]);
-    }
-    
-    // Formatear
-    hojaReporte.getRange(1, 1, 1, 2).setBackground("#bd000b").setFontColor("#e4e2dd").setFontWeight("bold");
-    hojaReporte.autoResizeColumns(1, 2);
-    
-    console.log("Reporte creado en la hoja 'Reporte'");
-    
-  } catch (error) {
-    console.error("Error al generar reporte: " + error.toString());
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// FUNCIÓN: ACTUALIZAR ESTADO DE REGISTRO
-// ═══════════════════════════════════════════════════════════════════════════════
-
-/**
- * Actualiza el estado de un registro (Pendiente, Aprobado, Rechazado)
- * 
- * @param {number} fila - Número de fila a actualizar (empezando desde 2)
- * @param {string} nuevoEstado - Nuevo estado ("Aprobado", "Rechazado", "Pendiente")
- */
-function actualizarEstado(fila, nuevoEstado) {
-  try {
-    var hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(NOMBRE_HOJA);
-    
-    // Columna G (índice 7) = Estado
-    hoja.getRange(fila, 7).setValue(nuevoEstado);
-    
-    console.log("Estado actualizado en fila " + fila + " a: " + nuevoEstado);
-    
-  } catch (error) {
-    console.error("Error al actualizar estado: " + error.toString());
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// FUNCIÓN: LIMPIAR REGISTROS ANTIGUOS
-// ═══════════════════════════════════════════════════════════════════════════════
-
-/**
- * Elimina registros con más de X días de antigüedad
- * 
- * @param {number} dias - Número de días (ej: 90 para eliminar registros de más de 90 días)
- */
-function limpiarRegistrosAntiguos(dias) {
-  try {
-    var hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(NOMBRE_HOJA);
-    var datos = hoja.getDataRange().getValues();
-    
-    var fechaLimite = new Date();
-    fechaLimite.setDate(fechaLimite.getDate() - dias);
-    
-    var filasEliminadas = 0;
-    
-    // Recorrer desde abajo hacia arriba para evitar problemas al eliminar
-    for (var i = datos.length - 1; i >= 1; i--) {
-      var fechaRegistro = new Date(datos[i][0]);
-      
-      if (fechaRegistro < fechaLimite) {
-        hoja.deleteRow(i + 1);
-        filasEliminadas++;
-      }
-    }
-    
-    console.log("Registros eliminados: " + filasEliminadas);
-    
-  } catch (error) {
-    console.error("Error al limpiar registros: " + error.toString());
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// FUNCIÓN: EXPORTAR DATOS A CSV
-// ═══════════════════════════════════════════════════════════════════════════════
-
-/**
- * Crea un archivo CSV con todos los registros en tu Google Drive
- */
-function exportarACSV() {
-  try {
-    var hoja = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(NOMBRE_HOJA);
-    var datos = hoja.getDataRange().getValues();
-    
-    // Crear contenido CSV
-    var csv = "";
-    
-    for (var i = 0; i < datos.length; i++) {
-      var fila = datos[i];
-      var filaCSV = fila.map(function(celda) {
-        return '"' + celda + '"';
-      }).join(",");
-      csv += filaCSV + "\n";
-    }
-    
-    // Crear archivo en Drive
-    var nombreArchivo = "HOOK_Registros_" + new Date().toISOString().split('T')[0] + ".csv";
-    var archivo = DriveApp.createFile(nombreArchivo, csv, MimeType.CSV);
-    
-    console.log("Archivo CSV creado: " + nombreArchivo);
-    console.log("URL: " + archivo.getUrl());
-    
-    return archivo.getUrl();
-    
-  } catch (error) {
-    console.error("Error al exportar CSV: " + error.toString());
-  }
-}
-
-// ═══════════════════════════════════════════════════════════════════════════════
-// FIN DEL CÓDIGO
-// ═══════════════════════════════════════════════════════════════════════════════
-
-    
-    ┌─────────────────────────────────────────────────────────────────────────────┐
-    │ FIN DEL CÓDIGO GOOGLE APPS SCRIPT                                           │
-    └─────────────────────────────────────────────────────────────────────────────┘
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    PASO 4: GUARDAR Y NOMBRAR EL PROYECTO
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    8. Haz clic en el icono del disco (💾) o presiona Ctrl+S para guardar
-    9. En la parte superior donde dice "Proyecto sin título", cámbialo a:
-       "HOOK Form Handler"
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    PASO 5: IMPLEMENTAR COMO WEB APP
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    10. Haz clic en "Implementar" (botón azul arriba a la derecha)
-    11. Selecciona "Nueva implementación"
-    12. Haz clic en el icono de engranaje ⚙️ al lado de "Seleccionar tipo"
-    13. Elige "Aplicación web"
-    14. Configura lo siguiente:
-        - Descripción: "HOOK Landing Form Handler"
-        - Ejecutar como: "Yo (tu email)"
-        - Quién tiene acceso: "Cualquier usuario"
-    15. Haz clic en "Implementar"
-    16. Aparecerá un mensaje de autorización, haz clic en "Autorizar acceso"
-    17. Selecciona tu cuenta de Google
-    18. Haz clic en "Avanzado" y luego en "Ir a HOOK Form Handler (no seguro)"
-    19. Haz clic en "Permitir"
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    PASO 6: COPIAR LA URL Y CONECTAR CON LA LANDING PAGE
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    20. Una vez implementado, aparecerá una ventana con "URL de la aplicación web"
-    21. COPIA esa URL completa (termina en /exec)
-    22. En el código HTML de la landing page (línea 1082 aproximadamente),
-        busca: const scriptURL = "TU_URL_DE_GOOGLE_APPS_SCRIPT";
-    23. Reemplaza "TU_URL_DE_GOOGLE_APPS_SCRIPT" con la URL que copiaste
-    
-    Ejemplo:
-    const scriptURL = "https://script.google.com/macros/s/ABC123.../exec";
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    PASO 7: PROBAR LA CONEXIÓN
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    24. Abre tu landing page en el navegador
-    25. Completa el formulario con datos de prueba
-    26. Haz clic en "Enviar Solicitud"
-    27. Verifica que aparezca el mensaje "¡Solicitud enviada con éxito!"
-    28. Abre tu Google Sheet y verifica que los datos aparezcan en una nueva fila
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    FUNCIONES ADICIONALES DISPONIBLES
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    El código incluye funciones extras que puedes ejecutar manualmente:
-    
-    1. generarReporte()
-       - Crea un reporte con estadísticas de registros por evento
-       - Para ejecutar: Selecciona la función en el menú desplegable y haz clic en ▶️
-    
-    2. actualizarEstado(fila, nuevoEstado)
-       - Actualiza el estado de un registro específico
-       - Ejemplo: actualizarEstado(2, "Aprobado")
-    
-    3. limpiarRegistrosAntiguos(dias)
-       - Elimina registros con más de X días de antigüedad
-       - Ejemplo: limpiarRegistrosAntiguos(90)
-    
-    4. exportarACSV()
-       - Crea un archivo CSV con todos los registros en tu Google Drive
-    
-    5. Ver registros en navegador
-       - Accede a la URL de tu Web App (sin el /exec al final)
-       - Verás una tabla con todos los registros
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    CONFIGURACIÓN AVANZADA (OPCIONAL)
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    En el código Apps Script, puedes cambiar estas variables al inicio:
-    
-    - NOMBRE_HOJA: Cambia si tu hoja tiene un nombre diferente a "Hoja 1"
-    - EMAIL_REMITENTE: Tu email para enviar confirmaciones
-    - ENVIAR_EMAIL_CONFIRMACION: Cambia a true para activar emails automáticos
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    SOLUCIÓN DE PROBLEMAS
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    Problema: "Error al enviar"
-    Solución: Verifica que la URL esté correctamente copiada y termine en /exec
-    
-    Problema: Los datos no aparecen en la hoja
-    Solución: Verifica que el nombre de la hoja en NOMBRE_HOJA coincida
-    
-    Problema: "Unauthorized"
-    Solución: Vuelve a autorizar el script en Implementar > Administrar implementaciones
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    -->
-  <section class="form-section section" id="contact">
-   <div class="section-content">
-    <h2 class="form-title" id="formTitle">Solicita tu Invitación</h2>
-    <p class="form-subtitle">Completa este formulario para aplicar a nuestros próximos eventos. Revisamos cada solicitud cuidadosamente.</p>
-    <form id="hookForm" class="form-container"><!-- Campo: Nombre -->
-     <div class="form-group"><label for="nombre" class="form-label">Nombre Completo</label> <input type="text" id="nombre" name="nombre" class="form-input" placeholder="Tu nombre" required>
-     </div><!-- Campo: Email -->
-     <div class="form-group"><label for="email" class="form-label">Email</label> <input type="email" id="email" name="email" class="form-input" placeholder="tu@email.com" required>
-     </div><!-- Campo: Edad -->
-     <div class="form-group"><label for="edad" class="form-label">Edad</label> <input type="number" id="edad" name="edad" class="form-input" placeholder="Ej: 28" min="18" max="99" required>
-     </div><!-- Campo: Ciudad -->
-     <div class="form-group"><label for="ciudad" class="form-label">Ciudad</label> <input type="text" id="ciudad" name="ciudad" class="form-input" placeholder="Ej: Madrid" required>
-     </div><!-- Campo: Evento Seleccionado -->
-     <div class="form-group"><label for="evento" class="form-label">Evento de Interés</label> <select id="evento" name="evento" class="form-select" required> <option value="">Selecciona un evento</option> <option value="Cena en la Azotea - 15 Dic">Cena en la Azotea - 15 Dic</option> <option value="Encuentro Cultural - 22 Dic">Encuentro Cultural - 22 Dic</option> <option value="Brunch &amp; Ideas - 5 Ene">Brunch &amp; Ideas - 5 Ene</option> <option value="Noche de Jazz - 12 Ene">Noche de Jazz - 12 Ene</option> <option value="Experiencia Gastronómica - 20 Ene">Experiencia Gastronómica - 20 Ene</option> <option value="Salón Literario - 28 Ene">Salón Literario - 28 Ene</option> </select>
-     </div><!-- Botón de Envío --> <button type="submit" class="cta-button form-submit" id="formSubmit"> Enviar Solicitud </button>
-    </form>
-   </div>
-  </section><!-- 
-    ═══════════════════════════════════════════════════════════════════════════════
-    FOOTER — CIERRE EDITORIAL
-    ════════════════════════════════════════════════���══════════════════════════════
-    
-    Footer en tres columnas con información de contacto y frase de cierre.
-    -->
-  <footer class="footer">
-   <div class="footer-content"><!-- Columna 1: Acerca de -->
-    <div class="footer-column">
-     <h3>Acerca de HOOK</h3>
-     <p>Creamos experiencias memorables donde personas fascinantes se conectan en contextos excepcionales.</p>
-    </div><!-- Columna 2: Contacto -->
-    <div class="footer-column">
-     <h3>Contacto</h3><a href="mailto:hola@hook.events">hola@hook.events</a> <a href="tel:+34912345678">+34 91 234 5678</a>
-     <p>Madrid, Barcelona, Valencia</p>
-    </div><!-- Columna 3: Enlaces -->
-    <div class="footer-column">
-     <h3>Enlaces</h3><a href="#about">Qué es HOOK</a> <a href="#events">Próximos Eventos</a> <a href="#contact">Solicita Invitación</a>
-    </div>
-   </div><!-- Línea de cierre -->
-   <div class="footer-bottom">
-    <p class="footer-tagline" id="footerTagline">Donde las mejores historias comienzan.</p>
-    <p class="footer-copyright">© 2024 HOOK. Todos los derechos reservados.</p>
-   </div>
-  </footer><!-- 
-    ══════════════════════════════════════════════════════════════���════════════════
-    JAVASCRIPT — FUNCIONALIDAD Y SDK
-    ═══════════════════════════════════════════════���═══════════════════════════════
-    
-    Este bloque contiene:
-    1. Configuración del Element SDK para edición de texto
-    2. Manejo del formulario y conexión con Google Sheets
-    3. Navegación suave entre secciones
-    
-    ═══════════════════════════════════════════════════════════════════════════════
-    -->
-  <script>
-        // ═══════════════════════════════════════════════════════════════════════════
-        // CONFIGURACIÓN DEL ELEMENT SDK
-        // ═══════════════════════════════════════════════════════════════════════════
-        
-        const defaultConfig = {
-            // Marca y navegación
-            logo_text: "HOOK.",
-            nav_home: "Home",
-            nav_events: "Events",
-            nav_about: "About",
-            nav_contact: "Contact",
+    <header class="glass-nav fixed w-full top-0 z-40 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-black tracking-tighter font-serif hover:text-red-600 transition-colors">HOOK.</a>
             
-            // Hero
-            hero_title: "Conexiones Auténticas en Espacios Extraordinarios",
-            hero_subtitle: "HOOK es donde las personas más interesantes se encuentran en los lugares más memorables de la ciudad.",
-            hero_cta: "Únete al Siguiente Evento",
+            <nav class="hidden md:flex gap-8">
+                <a href="#hero" class="text-xs uppercase tracking-widest hover:text-red-500 transition-colors" data-i18n="nav_home">Inicio</a>
+                <a href="#about" class="text-xs uppercase tracking-widest hover:text-red-500 transition-colors" data-i18n="nav_about">Qué es</a>
+                <a href="#events" class="text-xs uppercase tracking-widest hover:text-red-500 transition-colors" data-i18n="nav_events">Eventos</a>
+                <a href="#contact" class="text-xs uppercase tracking-widest text-red-500 font-bold" data-i18n="nav_apply">Aplicar</a>
+            </nav>
+
+            <button class="md:hidden text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+    </header>
+
+    <section id="hero" class="min-h-screen flex items-center justify-center relative pt-20">
+        <div class="max-w-4xl mx-auto px-6 text-center z-10">
+            <span class="inline-block mb-6 px-4 py-1 border border-red-900/30 rounded-full text-[10px] tracking-[0.3em] uppercase text-red-500 bg-red-900/10 backdrop-blur-sm reveal">
+                Editorial Experiences
+            </span>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold leading-tight mb-8 tracking-tight reveal" style="transition-delay: 100ms;">
+                <span data-i18n="hero_title_1">Conexiones Reales.</span><br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-500" data-i18n="hero_title_2">Espacios Únicos.</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-400 max-w-2xl mx-auto mb-12 font-light leading-relaxed reveal" style="transition-delay: 200ms;" data-i18n="hero_subtitle">
+                Una curaduría exclusiva de encuentros donde personas fascinantes coinciden en los lugares más memorables de la ciudad.
+            </p>
+            <div class="reveal" style="transition-delay: 300ms;">
+                <a href="#events" class="btn-editorial px-10 py-4 text-xs tracking-widest uppercase font-bold rounded-sm inline-block" data-i18n="cta_main">
+                    Ver Próximo Evento
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="py-32 relative">
+        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+            <div class="reveal">
+                <h2 class="text-4xl md:text-5xl mb-8" data-i18n="about_title">Más que networking,<br>es <span class="italic text-red-600">química</span>.</h2>
+                <div class="w-20 h-0.5 bg-red-600 mb-8"></div>
+            </div>
             
-            // What is HOOK
-            what_title: "Qué es HOOK",
-            what_content: "HOOK no es una aplicación de citas. No es networking convencional. Es una cuidadosa curaduría de experiencias donde personas fascinantes se encuentran en contextos excepcionales.",
-            
-            // How it works
-            how_title: "Cómo Funciona",
-            how_step1_title: "Aplica a un Evento",
-            how_step1_text: "Explora nuestros próximos eventos y elige el que más resuene contigo. Cada experiencia es única: desde cenas íntimas en azoteas hasta encuentros culturales en galerías de arte. Completa una breve aplicación que nos ayude a conocerte mejor.",
-            how_step2_title: "Recibe tu Invitación",
-            how_step2_text: "Nuestro equipo revisa cuidadosamente cada aplicación para curar un grupo diverso y complementario. Si eres seleccionado, recibirás una invitación personalizada con todos los detalles del evento y una introducción al contexto de la experiencia.",
-            how_step3_title: "Vive la Experiencia",
-            how_step3_text: "Llega al evento con mente abierta y curiosidad genuina. Disfruta de conversaciones significativas, descubre perspectivas fascinantes y construye conexiones auténticas. Cada experiencia está diseñada para facilitar interacciones naturales y memorables.",
-            
-            // Philosophy
-            philosophy_title: "Nuestra Filosofía",
-            philosophy_content: "En un mundo saturado de conexiones superficiales, HOOK crea espacios para profundidad. Creemos que las personas más interesantes merecen encuentros extraordinarios. Que la serendipia funciona mejor cuando está cuidadosamente cultivada. Que el contexto importa tanto como las personas. Y que las mejores historias comienzan con un \"Nos conocimos en un evento de HOOK...\"",
-            
-            // Form
-            form_title: "Solicita tu Invitación",
-            form_submit: "Enviar Solicitud",
-            
-            // Footer
-            footer_tagline: "Donde las mejores historias comienzan."
+            <div class="glass-panel p-8 md:p-12 rounded-lg reveal" style="transition-delay: 200ms;">
+                <p class="text-lg text-gray-300 leading-loose mb-6 font-light" data-i18n="about_p1">
+                    HOOK no es una aplicación de citas. Tampoco es un evento de networking corporativo. Es un espacio diseñado con intención.
+                </p>
+                <p class="text-lg text-gray-300 leading-loose font-light" data-i18n="about_p2">
+                    Priorizamos la calidad sobre la cantidad. Cada encuentro está limitado a un grupo selecto, asegurando que cada persona tenga espacio para brillar y conectar de manera significativa en un entorno de estética refinada.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="py-32">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="text-center mb-20 reveal">
+                <span class="text-red-500 text-xs tracking-widest uppercase font-bold block mb-4" data-i18n="process_kicker">El Proceso</span>
+                <h2 class="text-4xl md:text-5xl" data-i18n="process_title">Cómo ser parte</h2>
+            </div>
+
+            <div class="space-y-4 relative">
+                <div class="absolute left-[27px] top-4 bottom-4 w-px bg-gradient-to-b from-transparent via-red-900 to-transparent hidden md:block"></div>
+
+                <div class="glass-panel p-8 md:p-10 rounded-lg flex flex-col md:flex-row gap-8 items-start hover:border-red-900/50 transition-colors reveal">
+                    <div class="flex-shrink-0 w-14 h-14 rounded-full border border-red-900/50 bg-black flex items-center justify-center text-red-500 font-serif text-xl italic z-10">01</div>
+                    <div>
+                        <h3 class="text-2xl mb-3" data-i18n="step1_title">Aplica al Evento</h3>
+                        <p class="text-gray-400 font-light leading-relaxed" data-i18n="step1_text">
+                            Explora la agenda y selecciona la experiencia que resuene contigo. Completa una breve aplicación para que podamos conocer tu perfil.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 md:p-10 rounded-lg flex flex-col md:flex-row gap-8 items-start hover:border-red-900/50 transition-colors reveal" style="transition-delay: 100ms;">
+                    <div class="flex-shrink-0 w-14 h-14 rounded-full border border-red-900/50 bg-black flex items-center justify-center text-red-500 font-serif text-xl italic z-10">02</div>
+                    <div>
+                        <h3 class="text-2xl mb-3" data-i18n="step2_title">Curaduría de Invitados</h3>
+                        <p class="text-gray-400 font-light leading-relaxed" data-i18n="step2_text">
+                            Nuestro comité revisa cada perfil para asegurar un grupo diverso y complementario. Buscamos equilibrio y potencial de conexión.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="glass-panel p-8 md:p-10 rounded-lg flex flex-col md:flex-row gap-8 items-start hover:border-red-900/50 transition-colors reveal" style="transition-delay: 200ms;">
+                    <div class="flex-shrink-0 w-14 h-14 rounded-full border border-red-900/50 bg-black flex items-center justify-center text-red-500 font-serif text-xl italic z-10">03</div>
+                    <div>
+                        <h3 class="text-2xl mb-3" data-i18n="step3_title">La Experiencia</h3>
+                        <p class="text-gray-400 font-light leading-relaxed" data-i18n="step3_text">
+                            Si eres seleccionado, recibirás una invitación secreta con la ubicación exacta 24 horas antes. Prepárate para una noche inolvidable.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="events" class="py-32 border-t border-white/5 bg-gradient-to-b from-black to-[#0f0f0f]">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl" data-i18n="events_title">Próximos Encuentros</h2>
+                <a href="#" class="hidden md:block text-xs uppercase tracking-widest text-red-500 hover:text-white transition-colors" data-i18n="view_all">Ver todos →</a>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="glass-panel group cursor-pointer overflow-hidden rounded-sm reveal">
+                    <div class="aspect-[4/3] bg-gray-900 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-black group-hover:scale-105 transition-transform duration-700"></div>
+                        <div class="absolute inset-0 bg-black/40 group-hover:bg-transparent transition-colors duration-500"></div>
+                        <div class="absolute top-4 left-4 bg-white/10 backdrop-blur-md px-3 py-1 text-[10px] uppercase tracking-widest text-white border border-white/10">
+                            Sold Out
+                        </div>
+                    </div>
+                    <div class="p-8 relative">
+                        <div class="text-red-500 text-xs tracking-widest uppercase font-bold mb-2">Dec 12 — Madrid</div>
+                        <h3 class="text-2xl font-serif mb-2 group-hover:text-red-500 transition-colors">The Winter Gallery</h3>
+                        <p class="text-sm text-gray-500 mb-6">Cocktails & Art en Salamanca</p>
+                        <div class="w-full h-px bg-white/10 mb-6"></div>
+                        <span class="text-xs uppercase tracking-widest text-gray-400 group-hover:text-white transition-colors" data-i18n="waitlist">Unirse a lista de espera</span>
+                    </div>
+                </div>
+
+                <div class="glass-panel group cursor-pointer overflow-hidden rounded-sm border-red-900/30 reveal" style="transition-delay: 100ms;">
+                    <div class="aspect-[4/3] bg-gray-900 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-red-900/20 to-black group-hover:scale-105 transition-transform duration-700"></div>
+                        <div class="absolute top-4 left-4 bg-red-600 px-3 py-1 text-[10px] uppercase tracking-widest text-white">
+                            Open
+                        </div>
+                    </div>
+                    <div class="p-8 relative">
+                        <div class="text-red-500 text-xs tracking-widest uppercase font-bold mb-2">Jan 18 — Barcelona</div>
+                        <h3 class="text-2xl font-serif mb-2 group-hover:text-red-500 transition-colors">Rooftop Jazz</h3>
+                        <p class="text-sm text-gray-500 mb-6">Cena íntima en Born</p>
+                        <div class="w-full h-px bg-white/10 mb-6"></div>
+                        <span class="text-xs uppercase tracking-widest text-white flex items-center gap-2">
+                            <span data-i18n="apply_now">Aplicar ahora</span> 
+                            <span class="w-2 h-2 rounded-full bg-red-500 animate-pulse"></span>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="glass-panel group cursor-pointer overflow-hidden rounded-sm reveal" style="transition-delay: 200ms;">
+                    <div class="aspect-[4/3] bg-gray-900 relative overflow-hidden">
+                        <div class="absolute inset-0 bg-gradient-to-br from-gray-800 to-black group-hover:scale-105 transition-transform duration-700"></div>
+                    </div>
+                    <div class="p-8 relative">
+                        <div class="text-red-500 text-xs tracking-widest uppercase font-bold mb-2">Feb 04 — CDMX</div>
+                        <h3 class="text-2xl font-serif mb-2 group-hover:text-red-500 transition-colors">Mezcal & Vinyl</h3>
+                        <p class="text-sm text-gray-500 mb-6">Roma Norte Secret Location</p>
+                        <div class="w-full h-px bg-white/10 mb-6"></div>
+                        <span class="text-xs uppercase tracking-widest text-gray-400 group-hover:text-white transition-colors" data-i18n="coming_soon">Próximamente</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-32 relative overflow-hidden">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-red-900/10 rounded-full blur-[100px] pointer-events-none"></div>
+
+        <div class="max-w-2xl mx-auto px-6 relative z-10">
+            <div class="text-center mb-12 reveal">
+                <h2 class="text-3xl md:text-4xl mb-4" data-i18n="form_title">Solicita tu invitación</h2>
+                <p class="text-gray-400 font-light" data-i18n="form_subtitle">Únete a nuestra base de miembros para recibir acceso prioritario.</p>
+            </div>
+
+            <form class="space-y-6 reveal">
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="space-y-2">
+                        <label class="text-xs uppercase tracking-widest text-gray-500 ml-1" data-i18n="label_name">Nombre</label>
+                        <input type="text" class="w-full px-4 py-3 rounded-sm bg-white/5 border border-white/10 focus:border-red-500 outline-none transition-colors" placeholder="Jane Doe">
+                    </div>
+                    <div class="space-y-2">
+                        <label class="text-xs uppercase tracking-widest text-gray-500 ml-1" data-i18n="label_email">Email</label>
+                        <input type="email" class="w-full px-4 py-3 rounded-sm bg-white/5 border border-white/10 focus:border-red-500 outline-none transition-colors" placeholder="jane@example.com">
+                    </div>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-xs uppercase tracking-widest text-gray-500 ml-1" data-i18n="label_city">Ciudad de Interés</label>
+                    <select class="w-full px-4 py-3 rounded-sm bg-white/5 border border-white/10 focus:border-red-500 outline-none transition-colors appearance-none">
+                        <option>Madrid</option>
+                        <option>Barcelona</option>
+                        <option>Ciudad de México</option>
+                        <option>Buenos Aires</option>
+                    </select>
+                </div>
+
+                <div class="space-y-2">
+                    <label class="text-xs uppercase tracking-widest text-gray-500 ml-1" data-i18n="label_linkedin">LinkedIn / Instagram</label>
+                    <input type="text" class="w-full px-4 py-3 rounded-sm bg-white/5 border border-white/10 focus:border-red-500 outline-none transition-colors" placeholder="@username">
+                </div>
+
+                <button type="submit" class="w-full btn-editorial py-4 text-xs tracking-widest uppercase font-bold mt-8 rounded-sm" data-i18n="btn_submit">
+                    Enviar Solicitud
+                </button>
+                
+                <p class="text-[10px] text-center text-gray-600 mt-4" data-i18n="form_disclaimer">
+                    Al aplicar, aceptas nuestra política de privacidad y curaduría. La aplicación no garantiza entrada.
+                </p>
+            </form>
+        </div>
+    </section>
+
+    <footer class="border-t border-white/5 pt-20 pb-10 bg-black">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-4 gap-12 mb-20">
+                <div class="col-span-1 md:col-span-1">
+                    <a href="#" class="text-3xl font-black tracking-tighter font-serif block mb-6">HOOK.</a>
+                    <p class="text-sm text-gray-500 leading-relaxed" data-i18n="footer_desc">
+                        Redefiniendo el arte de conectar en la era moderna.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest font-bold mb-6 text-white" data-i18n="footer_social">Social</h4>
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-red-500 transition-colors">Instagram</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition-colors">LinkedIn</a></li>
+                        <li><a href="#" class="hover:text-red-500 transition-colors">Twitter</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest font-bold mb-6 text-white" data-i18n="footer_legal">Legal</h4>
+                    <ul class="space-y-3 text-sm text-gray-500">
+                        <li><a href="#" class="hover:text-white transition-colors" data-i18n="privacy">Privacidad</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-i18n="terms">Términos</a></li>
+                        <li><a href="#" class="hover:text-white transition-colors" data-i18n="cookies">Cookies</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-xs uppercase tracking-widest font-bold mb-6 text-white" data-i18n="footer_contact">Contacto</h4>
+                    <a href="mailto:hello@hook.editorial" class="text-sm text-gray-500 hover:text-red-500 transition-colors">hello@hook.editorial</a>
+                </div>
+            </div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center border-t border-white/5 pt-8">
+                <p class="text-[10px] text-gray-600 uppercase tracking-widest">© 2025 HOOK Editorial.</p>
+                <p class="text-[10px] text-gray-600 uppercase tracking-widest mt-2 md:mt-0">Est. Palma de Mallorca, ES.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 1. DICCIONARIO DE TRADUCCIONES
+        const translations = {
+            es: {
+                nav_home: "Inicio",
+                nav_about: "Qué es",
+                nav_events: "Eventos",
+                nav_apply: "Aplicar",
+                hero_title_1: "Conexiones Reales.",
+                hero_title_2: "Espacios Únicos.",
+                hero_subtitle: "Una curaduría exclusiva de encuentros donde personas fascinantes coinciden en los lugares más memorables de la ciudad.",
+                cta_main: "Ver Próximo Evento",
+                about_title: "Más que networking,<br>es <span class='italic text-red-600'>química</span>.",
+                about_p1: "HOOK no es una aplicación de citas. Tampoco es un evento de networking corporativo. Es un espacio diseñado con intención.",
+                about_p2: "Priorizamos la calidad sobre la cantidad. Cada encuentro está limitado a un grupo selecto, asegurando que cada persona tenga espacio para brillar.",
+                process_kicker: "El Proceso",
+                process_title: "Cómo ser parte",
+                step1_title: "Aplica al Evento",
+                step1_text: "Explora la agenda y selecciona la experiencia que resuene contigo. Completa una breve aplicación.",
+                step2_title: "Curaduría de Invitados",
+                step2_text: "Nuestro comité revisa cada perfil para asegurar un grupo diverso y complementario.",
+                step3_title: "La Experiencia",
+                step3_text: "Si eres seleccionado, recibirás una invitación secreta con la ubicación exacta 24 horas antes.",
+                events_title: "Próximos Encuentros",
+                view_all: "Ver todos →",
+                waitlist: "Unirse a lista de espera",
+                apply_now: "Aplicar ahora",
+                coming_soon: "Próximamente",
+                form_title: "Solicita tu invitación",
+                form_subtitle: "Únete a nuestra base de miembros para recibir acceso prioritario.",
+                label_name: "Nombre",
+                label_email: "Email",
+                label_city: "Ciudad de Interés",
+                label_linkedin: "LinkedIn / Instagram",
+                btn_submit: "Enviar Solicitud",
+                form_disclaimer: "Al aplicar, aceptas nuestra política de privacidad.",
+                footer_desc: "Redefiniendo el arte de conectar en la era moderna.",
+                footer_social: "Social",
+                footer_legal: "Legal",
+                footer_contact: "Contacto",
+                privacy: "Privacidad",
+                terms: "Términos",
+                cookies: "Cookies"
+            },
+            en: {
+                nav_home: "Home",
+                nav_about: "About",
+                nav_events: "Events",
+                nav_apply: "Apply",
+                hero_title_1: "Real Connections.",
+                hero_title_2: "Unique Spaces.",
+                hero_subtitle: "An exclusive curation of gatherings where fascinating people meet in the city's most memorable locations.",
+                cta_main: "View Next Event",
+                about_title: "More than networking,<br>it's <span class='italic text-red-600'>chemistry</span>.",
+                about_p1: "HOOK is not a dating app. Nor is it a corporate networking event. It is a space designed with intention.",
+                about_p2: "We prioritize quality over quantity. Each gathering is limited to a select group, ensuring everyone has space to shine.",
+                process_kicker: "The Process",
+                process_title: "How it works",
+                step1_title: "Apply for Event",
+                step1_text: "Explore the agenda and pick the experience that resonates with you. Fill out a brief application.",
+                step2_title: "Guest Curation",
+                step2_text: "Our committee reviews every profile to ensure a diverse and complementary group.",
+                step3_title: "The Experience",
+                step3_text: "If selected, you will receive a secret invitation with the exact location 24 hours prior.",
+                events_title: "Upcoming Gatherings",
+                view_all: "View all →",
+                waitlist: "Join Waitlist",
+                apply_now: "Apply Now",
+                coming_soon: "Coming Soon",
+                form_title: "Request Invitation",
+                form_subtitle: "Join our member base for priority access.",
+                label_name: "Name",
+                label_email: "Email",
+                label_city: "City of Interest",
+                label_linkedin: "LinkedIn / Instagram",
+                btn_submit: "Send Request",
+                form_disclaimer: "By applying, you accept our privacy policy.",
+                footer_desc: "Redefining the art of connection in the modern era.",
+                footer_social: "Social",
+                footer_legal: "Legal",
+                footer_contact: "Contact",
+                privacy: "Privacy",
+                terms: "Terms",
+                cookies: "Cookies"
+            }
         };
-        
-        // Función que actualiza el DOM cuando cambia la configuración
-        async function onConfigChange(config) {
-            // Marca y navegación
-            const logoElement = document.getElementById('logo');
-            if (logoElement) logoElement.textContent = config.logo_text || defaultConfig.logo_text;
-            
-            const navHomeElement = document.getElementById('navHome');
-            if (navHomeElement) navHomeElement.textContent = config.nav_home || defaultConfig.nav_home;
-            
-            const navEventsElement = document.getElementById('navEvents');
-            if (navEventsElement) navEventsElement.textContent = config.nav_events || defaultConfig.nav_events;
-            
-            const navAboutElement = document.getElementById('navAbout');
-            if (navAboutElement) navAboutElement.textContent = config.nav_about || defaultConfig.nav_about;
-            
-            const navContactElement = document.getElementById('navContact');
-            if (navContactElement) navContactElement.textContent = config.nav_contact || defaultConfig.nav_contact;
-            
-            // Hero
-            const heroTitleElement = document.getElementById('heroTitle');
-            if (heroTitleElement) heroTitleElement.textContent = config.hero_title || defaultConfig.hero_title;
-            
-            const heroSubtitleElement = document.getElementById('heroSubtitle');
-            if (heroSubtitleElement) heroSubtitleElement.textContent = config.hero_subtitle || defaultConfig.hero_subtitle;
-            
-            const heroCtaElement = document.getElementById('heroCta');
-            if (heroCtaElement) heroCtaElement.textContent = config.hero_cta || defaultConfig.hero_cta;
-            
-            // What is HOOK
-            const whatTitleElement = document.getElementById('whatTitle');
-            if (whatTitleElement) whatTitleElement.textContent = config.what_title || defaultConfig.what_title;
-            
-            const whatContentElement = document.getElementById('whatContent');
-            if (whatContentElement) whatContentElement.textContent = config.what_content || defaultConfig.what_content;
-            
-            // How it works
-            const howTitleElement = document.getElementById('howTitle');
-            if (howTitleElement) howTitleElement.textContent = config.how_title || defaultConfig.how_title;
-            
-            const howStep1TitleElement = document.getElementById('howStep1Title');
-            if (howStep1TitleElement) howStep1TitleElement.textContent = config.how_step1_title || defaultConfig.how_step1_title;
-            
-            const howStep1TextElement = document.getElementById('howStep1Text');
-            if (howStep1TextElement) howStep1TextElement.textContent = config.how_step1_text || defaultConfig.how_step1_text;
-            
-            const howStep2TitleElement = document.getElementById('howStep2Title');
-            if (howStep2TitleElement) howStep2TitleElement.textContent = config.how_step2_title || defaultConfig.how_step2_title;
-            
-            const howStep2TextElement = document.getElementById('howStep2Text');
-            if (howStep2TextElement) howStep2TextElement.textContent = config.how_step2_text || defaultConfig.how_step2_text;
-            
-            const howStep3TitleElement = document.getElementById('howStep3Title');
-            if (howStep3TitleElement) howStep3TitleElement.textContent = config.how_step3_title || defaultConfig.how_step3_title;
-            
-            const howStep3TextElement = document.getElementById('howStep3Text');
-            if (howStep3TextElement) howStep3TextElement.textContent = config.how_step3_text || defaultConfig.how_step3_text;
-            
-            // Philosophy
-            const philosophyTitleElement = document.getElementById('philosophyTitle');
-            if (philosophyTitleElement) philosophyTitleElement.textContent = config.philosophy_title || defaultConfig.philosophy_title;
-            
-            const philosophyContentElement = document.getElementById('philosophyContent');
-            if (philosophyContentElement) philosophyContentElement.textContent = config.philosophy_content || defaultConfig.philosophy_content;
-            
-            // Form
-            const formTitleElement = document.getElementById('formTitle');
-            if (formTitleElement) formTitleElement.textContent = config.form_title || defaultConfig.form_title;
-            
-            const formSubmitElement = document.getElementById('formSubmit');
-            if (formSubmitElement) formSubmitElement.textContent = config.form_submit || defaultConfig.form_submit;
-            
-            // Footer
-            const footerTaglineElement = document.getElementById('footerTagline');
-            if (footerTaglineElement) footerTaglineElement.textContent = config.footer_tagline || defaultConfig.footer_tagline;
-        }
-        
-        // Mapeo de capabilities (sin capacidades de color/fuente en este caso)
-        function mapToCapabilities(config) {
-            return {
-                recolorables: [],
-                borderables: [],
-                fontEditable: undefined,
-                fontSizeable: undefined
-            };
-        }
-        
-        // Mapeo de valores para el panel de edición
-        function mapToEditPanelValues(config) {
-            return new Map([
-                ["logo_text", config.logo_text || defaultConfig.logo_text],
-                ["nav_home", config.nav_home || defaultConfig.nav_home],
-                ["nav_events", config.nav_events || defaultConfig.nav_events],
-                ["nav_about", config.nav_about || defaultConfig.nav_about],
-                ["nav_contact", config.nav_contact || defaultConfig.nav_contact],
-                ["hero_title", config.hero_title || defaultConfig.hero_title],
-                ["hero_subtitle", config.hero_subtitle || defaultConfig.hero_subtitle],
-                ["hero_cta", config.hero_cta || defaultConfig.hero_cta],
-                ["what_title", config.what_title || defaultConfig.what_title],
-                ["what_content", config.what_content || defaultConfig.what_content],
-                ["how_title", config.how_title || defaultConfig.how_title],
-                ["how_step1_title", config.how_step1_title || defaultConfig.how_step1_title],
-                ["how_step1_text", config.how_step1_text || defaultConfig.how_step1_text],
-                ["how_step2_title", config.how_step2_title || defaultConfig.how_step2_title],
-                ["how_step2_text", config.how_step2_text || defaultConfig.how_step2_text],
-                ["how_step3_title", config.how_step3_title || defaultConfig.how_step3_title],
-                ["how_step3_text", config.how_step3_text || defaultConfig.how_step3_text],
-                ["philosophy_title", config.philosophy_title || defaultConfig.philosophy_title],
-                ["philosophy_content", config.philosophy_content || defaultConfig.philosophy_content],
-                ["form_title", config.form_title || defaultConfig.form_title],
-                ["form_submit", config.form_submit || defaultConfig.form_submit],
-                ["footer_tagline", config.footer_tagline || defaultConfig.footer_tagline]
-            ]);
-        }
-        
-        // Inicialización del Element SDK
-        if (window.elementSdk) {
-            window.elementSdk.init({
-                defaultConfig,
-                onConfigChange,
-                mapToCapabilities,
-                mapToEditPanelValues
-            });
-        }
-        
-        // ═══════════════════════════════════════════════════���═══════════════════════
-        // MANEJO DEL FORMULARIO — GOOGLE SHEETS
-        // ═══════════════════════════════════════════════════════════════════════════
-        
-        // REEMPLAZA ESTA URL CON LA URL DE TU GOOGLE APPS SCRIPT
-        const scriptURL = "TU_URL_DE_GOOGLE_APPS_SCRIPT";
-        
-        const form = document.querySelector("#hookForm");
-        
-        if (form) {
-            form.addEventListener("submit", function(e) {
-                e.preventDefault();
-                
-                // Deshabilitar botón durante el envío
-                const submitButton = document.getElementById('formSubmit');
-                const originalText = submitButton.textContent;
-                submitButton.textContent = "Enviando...";
-                submitButton.disabled = true;
-                
-                // Enviar datos a Google Sheets
-                fetch(scriptURL, {
-                    method: "POST",
-                    body: new FormData(form)
-                })
-                .then(response => {
-                    // Mostrar mensaje de éxito
-                    const successMessage = document.createElement('div');
-                    successMessage.style.cssText = 'padding: 20px; margin-top: 20px; background-color: rgba(189, 0, 11, 0.1); border: 1px solid #bd000b; text-align: center; font-family: var(--font-sans); color: var(--color-text);';
-                    successMessage.textContent = '¡Solicitud enviada con éxito! Te contactaremos pronto.';
-                    form.parentNode.insertBefore(successMessage, form.nextSibling);
-                    
-                    // Limpiar formulario
-                    form.reset();
-                    
-                    // Restaurar botón
-                    submitButton.textContent = originalText;
-                    submitButton.disabled = false;
-                    
-                    // Eliminar mensaje después de 5 segundos
-                    setTimeout(() => {
-                        successMessage.remove();
-                    }, 5000);
-                })
-                .catch(error => {
-                    // Mostrar mensaje de error
-                    const errorMessage = document.createElement('div');
-                    errorMessage.style.cssText = 'padding: 20px; margin-top: 20px; background-color: rgba(189, 0, 11, 0.1); border: 1px solid #bd000b; text-align: center; font-family: var(--font-sans); color: var(--color-text);';
-                    errorMessage.textContent = 'Hubo un error al enviar. Por favor intenta de nuevo.';
-                    form.parentNode.insertBefore(errorMessage, form.nextSibling);
-                    
-                    // Restaurar botón
-                    submitButton.textContent = originalText;
-                    submitButton.disabled = false;
-                    
-                    // Eliminar mensaje después de 5 segundos
-                    setTimeout(() => {
-                        errorMessage.remove();
-                    }, 5000);
-                });
-            });
-        }
-        
-        // ═══════════════════════════════════════════════════════════════════════════
-        // NAVEGACIÓN SUAVE
-        // ═══════════════════════════════════════════════════════════════════════════
-        
-        // Añadir scroll suave a todos los enlaces internos
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    const headerHeight = document.querySelector('.header').offsetHeight;
-                    const targetPosition = targetElement.offsetTop - headerHeight;
-                    
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
+
+        // 2. LÓGICA DE CAMBIO DE IDIOMA
+        let currentLang = 'es';
+        const langBtn = document.getElementById('langToggle');
+        const langLabel = document.getElementById('currentLangLabel');
+
+        function updateLanguage(lang) {
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                if (translations[lang][key]) {
+                    // Si el contenido tiene HTML (como el span italic), usa innerHTML
+                    if (translations[lang][key].includes('<')) {
+                        element.innerHTML = translations[lang][key];
+                    } else {
+                        element.innerText = translations[lang][key];
+                    }
                 }
             });
+            
+            // Actualizar etiqueta del botón
+            langLabel.innerText = lang.toUpperCase();
+            
+            // Actualizar atributo lang del html
+            document.documentElement.lang = lang;
+        }
+
+        langBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+            // Animación simple del botón
+            langBtn.classList.add('scale-95');
+            setTimeout(() => langBtn.classList.remove('scale-95'), 150);
+            
+            updateLanguage(currentLang);
         });
-        
-        // ══════════════════════════════════════════════���════════════════════════════
-        // FIN DEL JAVASCRIPT
-        // ════════════════════════════���══════════════════════════════════════════════
+
+        // 3. ANIMACIONES AL HACER SCROLL (INTERSECTION OBSERVER)
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: "0px 0px -50px 0px"
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach(el => {
+            observer.observe(el);
+        });
+
     </script>
- <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9a554e8e9019cbd4',t:'MTc2NDI4NTEwOS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
