@@ -1,0 +1,806 @@
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+HOOK EDITORIAL LANDING PAGE - CSS
+═══════════════════════════════════════════════════════════════════════════════
+
+Una landing page minimalista de alto impacto visual, inspirada en revistas
+editoriales premium como Kinfolk, Cereal y The Gentlewoman.
+
+PALETA DE COLORES:
+- #1a171b = Fondo principal (negro profundo editorial)
+- #e4e2dd = Textos claros, títulos, divisores
+- #bd000b = Acentos y CTAs (rojo intenso)
+- #fae1d5 = Elementos suaves, backgrounds alternos
+
+PRINCIPIOS DE DISEÑO:
+- Espaciado amplio y generoso entre secciones
+- Tipografía grande y elegante con alto contraste
+- Sin imágenes, iconos o elementos gráficos
+- Transiciones suaves y refinadas
+- Estética calmada, premium y madura
+
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+RESET Y CONFIGURACIÓN BASE
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    box-sizing: border-box;
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+VARIABLES CSS — SISTEMA DE DISEÑO
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+:root {
+    /* Paleta de colores editorial */
+    --color-background: #1a171b;
+    --color-text: #e4e2dd;
+    --color-accent: #bd000b;
+    --color-soft: #fae1d5;
+    
+    /* Sistema tipográfico */
+    --font-serif: 'Playfair Display', 'Georgia', serif;
+    --font-sans: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+    
+    /* Espaciado editorial generoso */
+    --space-section: 200px;
+    --space-large: 120px;
+    --space-medium: 80px;
+    --space-small: 40px;
+    --space-tiny: 20px;
+    
+    /* Tamaños de fuente escalables */
+    --text-hero: 72px;
+    --text-heading: 48px;
+    --text-subheading: 32px;
+    --text-body: 18px;
+    --text-small: 14px;
+    
+    /* Anchos máximos para lectura óptima */
+    --width-text: 720px;
+    --width-content: 1200px;
+    
+    /* Transiciones suaves */
+    --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+TIPOGRAFÍA BASE
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap');
+
+html {
+    font-size: 16px;
+    height: 100%;
+}
+
+body {
+    font-family: var(--font-sans);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    line-height: 1.8;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    width: 100%;
+    height: 100%;
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+JERARQUÍA TIPOGRÁFICA
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-serif);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.5px;
+    margin-bottom: var(--space-small);
+}
+
+h1 {
+    font-size: var(--text-hero);
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+
+h2 {
+    font-size: var(--text-heading);
+    letter-spacing: -1px;
+}
+
+h3 {
+    font-size: var(--text-subheading);
+}
+
+p {
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.8;
+    margin-bottom: var(--space-small);
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+HEADER — NAVEGACIÓN MINIMALISTA
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.header {
+    width: 100%;
+    padding: var(--space-small) var(--space-medium);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(228, 226, 221, 0.1);
+    background-color: var(--color-background);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+.logo {
+    font-family: var(--font-serif);
+    font-size: 32px;
+    font-weight: 900;
+    letter-spacing: -1px;
+    color: var(--color-text);
+    text-decoration: none;
+}
+
+.nav {
+    display: flex;
+    gap: var(--space-medium);
+    align-items: center;
+}
+
+.nav-link {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 400;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    text-decoration: none;
+    opacity: 0.7;
+    transition: var(--transition-smooth);
+}
+
+.nav-link:hover {
+    opacity: 1;
+    color: var(--color-accent);
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+SECCIONES — ESTRUCTURA GENERAL
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.section {
+    width: 100%;
+    padding: var(--space-section) var(--space-medium);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.section-content {
+    width: 100%;
+    max-width: var(--width-content);
+}
+
+.section-text {
+    max-width: var(--width-text);
+    margin: 0 auto;
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+HERO SECTION — IMPACTO INICIAL
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.hero-title {
+    max-width: 900px;
+    margin-bottom: var(--space-small);
+    animation: fadeInUp 1.2s ease-out;
+}
+
+.hero-subtitle {
+    font-family: var(--font-sans);
+    font-size: 24px;
+    font-weight: 300;
+    max-width: 600px;
+    margin-bottom: var(--space-medium);
+    opacity: 0.8;
+    animation: fadeInUp 1.4s ease-out;
+}
+
+.hero-line {
+    width: 120px;
+    height: 1px;
+    background-color: var(--color-text);
+    margin: var(--space-medium) auto;
+    opacity: 0.3;
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+BOTONES — LLAMADAS A LA ACCIÓN
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.cta-button {
+    display: inline-block;
+    padding: 18px 48px;
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-text);
+    background-color: var(--color-accent);
+    border: none;
+    text-decoration: none;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    animation: fadeInUp 1.6s ease-out;
+}
+
+.cta-button:hover {
+    background-color: #a00009;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(189, 0, 11, 0.3);
+}
+
+.cta-button:active {
+    transform: translateY(0);
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+ANIMACIONES SUTILES
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+WHAT IS HOOK — SECCIÓN INFORMATIVA
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.what-section {
+    background-color: var(--color-background);
+}
+
+.what-title {
+    text-align: center;
+    margin-bottom: var(--space-large);
+}
+
+.what-text {
+    font-size: 20px;
+    line-height: 2;
+    text-align: left;
+    opacity: 0.9;
+}
+
+.what-text p {
+    margin-bottom: var(--space-medium);
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+HOW IT WORKS — PROCESO EN PASOS
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.how-section {
+    background-color: var(--color-background);
+}
+
+.how-title {
+    text-align: center;
+    margin-bottom: var(--space-large);
+}
+
+.how-steps {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-large);
+    max-width: var(--width-text);
+    margin: 0 auto;
+}
+
+.step {
+    padding: var(--space-medium) 0;
+    border-bottom: 1px solid rgba(228, 226, 221, 0.1);
+}
+
+.step:last-child {
+    border-bottom: none;
+}
+
+.step-number {
+    font-family: var(--font-serif);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-tiny);
+}
+
+.step-title {
+    font-size: var(--text-subheading);
+    margin-bottom: var(--space-small);
+}
+
+.step-text {
+    font-size: var(--text-body);
+    line-height: 1.8;
+    opacity: 0.8;
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+PHILOSOPHY — MANIFIESTO EDITORIAL
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.philosophy-section {
+    background-color: var(--color-soft);
+    color: var(--color-background);
+}
+
+.philosophy-title {
+    text-align: center;
+    color: var(--color-background);
+    margin-bottom: var(--space-large);
+}
+
+.philosophy-text {
+    font-size: 22px;
+    line-height: 2.2;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--color-background);
+    font-weight: 300;
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+TESTIMONIALS — VOCES EDITORIALES
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.testimonials-section {
+    background-color: var(--color-background);
+}
+
+.testimonials-title {
+    text-align: center;
+    margin-bottom: var(--space-large);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: var(--space-large);
+    max-width: var(--width-content);
+}
+
+.testimonial {
+    padding: var(--space-medium);
+    border: 1px solid rgba(228, 226, 221, 0.1);
+    transition: var(--transition-smooth);
+}
+
+.testimonial:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-5px);
+}
+
+.testimonial-quote {
+    font-family: var(--font-serif);
+    font-size: 20px;
+    line-height: 1.7;
+    font-style: italic;
+    margin-bottom: var(--space-small);
+    opacity: 0.9;
+}
+
+.testimonial-line {
+    width: 40px;
+    height: 1px;
+    background-color: var(--color-accent);
+    margin: var(--space-small) 0;
+}
+
+.testimonial-author {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.testimonial-role {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 300;
+    opacity: 0.6;
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+EVENTS — PRÓXIMOS ENCUENTROS
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.events-section {
+    background-color: var(--color-background);
+}
+
+.events-title {
+    text-align: center;
+    margin-bottom: var(--space-large);
+}
+
+.events-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--space-medium);
+    max-width: var(--width-content);
+}
+
+.event-card {
+    padding: var(--space-medium);
+    border: 1px solid rgba(228, 226, 221, 0.1);
+    transition: var(--transition-smooth);
+    cursor: pointer;
+}
+
+.event-card:hover {
+    border-color: var(--color-accent);
+    transform: translateY(-3px);
+}
+
+.event-date {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: var(--space-tiny);
+}
+
+.event-name {
+    font-family: var(--font-serif);
+    font-size: 28px;
+    margin-bottom: var(--space-tiny);
+}
+
+.event-location {
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    opacity: 0.6;
+    margin-bottom: var(--space-tiny);
+}
+
+.event-description {
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.6;
+    opacity: 0.8;
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+FORM — REGISTRO FUNCIONAL
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.form-section {
+    background-color: var(--color-background);
+}
+
+.form-title {
+    text-align: center;
+    margin-bottom: var(--space-small);
+}
+
+.form-subtitle {
+    text-align: center;
+    font-size: var(--text-body);
+    opacity: 0.7;
+    margin-bottom: var(--space-large);
+}
+
+.form-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-group {
+    margin-bottom: var(--space-small);
+}
+
+.form-label {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: var(--text-small);
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: var(--color-text);
+}
+
+.form-input,
+.form-select {
+    width: 100%;
+    padding: 16px 20px;
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    color: var(--color-text);
+    background-color: transparent;
+    border: 1px solid rgba(228, 226, 221, 0.2);
+    transition: var(--transition-smooth);
+}
+
+.form-input:focus,
+.form-select:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    background-color: rgba(228, 226, 221, 0.02);
+}
+
+.form-select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23e4e2dd' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    padding-right: 50px;
+}
+
+.form-submit {
+    width: 100%;
+    margin-top: var(--space-small);
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+FOOTER — CIERRE EDITORIAL
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.footer {
+    width: 100%;
+    padding: var(--space-large) var(--space-medium) var(--space-medium);
+    border-top: 1px solid rgba(228, 226, 221, 0.1);
+    background-color: var(--color-background);
+}
+
+.footer-content {
+    max-width: var(--width-content);
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-medium);
+    margin-bottom: var(--space-large);
+}
+
+.footer-column h3 {
+    font-size: 18px;
+    margin-bottom: var(--space-small);
+    color: var(--color-text);
+}
+
+.footer-column p,
+.footer-column a {
+    font-size: var(--text-small);
+    line-height: 1.8;
+    opacity: 0.7;
+    color: var(--color-text);
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+    transition: var(--transition-smooth);
+}
+
+.footer-column a:hover {
+    opacity: 1;
+    color: var(--color-accent);
+}
+
+.footer-bottom {
+    max-width: var(--width-content);
+    margin: 0 auto;
+    padding-top: var(--space-medium);
+    border-top: 1px solid rgba(228, 226, 221, 0.1);
+    text-align: center;
+}
+
+.footer-tagline {
+    font-family: var(--font-serif);
+    font-size: 24px;
+    font-style: italic;
+    color: var(--color-text);
+    opacity: 0.8;
+    margin-bottom: var(--space-tiny);
+}
+
+.footer-copyright {
+    font-size: var(--text-small);
+    opacity: 0.5;
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+RESPONSIVE DESIGN — ADAPTACIÓN MÓVIL
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+@media (max-width: 1024px) {
+    :root {
+        --text-hero: 56px;
+        --text-heading: 38px;
+        --text-subheading: 28px;
+        --space-section: 120px;
+        --space-large: 80px;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .events-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --text-hero: 42px;
+        --text-heading: 32px;
+        --text-subheading: 24px;
+        --text-body: 16px;
+        --space-section: 80px;
+        --space-large: 60px;
+        --space-medium: 40px;
+    }
+    
+    .header {
+        flex-direction: column;
+        gap: var(--space-small);
+        padding: var(--space-small);
+    }
+    
+    .nav {
+        gap: var(--space-small);
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .hero-subtitle {
+        font-size: 18px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: var(--space-medium);
+    }
+    
+    .what-text {
+        font-size: 18px;
+    }
+    
+    .philosophy-text {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --text-hero: 32px;
+        --text-heading: 28px;
+        --text-subheading: 20px;
+    }
+    
+    .section {
+        padding: var(--space-medium) var(--space-small);
+    }
+    
+    .cta-button {
+        padding: 14px 32px;
+        font-size: 12px;
+    }
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+UTILITY CLASSES — CLASES DE UTILIDAD
+═══════════════════════════════════════════════════════════════════════════════
+*/
+
+.text-center {
+    text-align: center;
+}
+
+.mb-large {
+    margin-bottom: var(--space-large);
+}
+
+.mb-medium {
+    margin-bottom: var(--space-medium);
+}
+
+.mb-small {
+    margin-bottom: var(--space-small);
+}
+
+.opacity-high {
+    opacity: 0.9;
+}
+
+.opacity-medium {
+    opacity: 0.7;
+}
+
+.opacity-low {
+    opacity: 0.5;
+}
+
+/* 
+═══════════════════════════════════════════════════════════════════════════════
+FIN DE ESTILOS CSS
+═══════════════════════════════════════════════════════════════════════════════
+*/
